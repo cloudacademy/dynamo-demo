@@ -1,5 +1,5 @@
 
-var AWS = require('AWS');
+var AWS = require('aws-sdk');
 var Dynamo = new AWS.DynamoDB.DocumentClient();
 var express = require('express');
 var bodyParser = require('body-parser');
