@@ -23,8 +23,7 @@ app.get('/todo/', function (req, res) {
   }, function (err, result) {
     if (err) {
       console.log('ERROR ON SCAN: ', err);
-      res.statusCode = err.statusCode;
-      res.end(JSON.stringify(err));
+      res.sendStatus(500);
     } else {
       console.log('SCAN RETURNED:', result.Items);
       res.json(result.Items);
@@ -42,8 +41,7 @@ app.get('/todo/:id', function (req, res) {
   }, function (err, result) {
     console.log('ERROR ON GET: ', err);
     if (err) {
-      res.statusCode = err.statusCode;
-      res.end(JSON.stringify(err));
+      res.sendStatus(404);
     } else {
       console.log('GET RETURNED:', result.Item);
       res.json(result.Item);
@@ -61,7 +59,7 @@ app.put('/todo/:id', function (req, res) {
     console.log('ERROR ON PUT: ', err);
     if (err) {
       res.statusCode = err.statusCode;
-      res.end(JSON.stringify(err));
+      res.sendStatus(500);
     } else {
       console.log('PUT RETURNED:', req.body);
       res.json(req.body);
@@ -79,7 +77,7 @@ app.post('/todo', function (req, res) {
     console.log('ERROR ON POST: ', err);
     if (err) {
       res.statusCode = err.statusCode;
-      res.end(JSON.stringify(err));
+      res.sendStatus(500);
     } else {
       console.log('POST RETURNED:', req.body);
       res.json(req.body);
@@ -97,12 +95,10 @@ app.delete('/todo/:id', function (req, res) {
   }, function (err, result) {
     console.log('ERROR ON DELETE: ', err);
     if (err) {
-      res.statusCode = err.statusCode;
-      res.end('');
+      res.sendStatus(404);
     } else {
       console.log('DELETE RETURNED:', 'OK');
-      res.statusCode = 200;
-      res.end('OK');
+      res.sendStatus(200);
     }
   });
 });
